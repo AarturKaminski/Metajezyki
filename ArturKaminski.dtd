@@ -1,0 +1,113 @@
+<?xml encoding="UTF-8"?>
+
+<!ELEMENT Configuration (SynchronizationAgent,ExchangeServer,
+                         DataSetsConfiguration+)>
+<!ATTLIST Configuration
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT SynchronizationAgent (TempDataLocation)>
+<!ATTLIST SynchronizationAgent
+  xmlns CDATA #FIXED ''
+  server CDATA #REQUIRED
+  server_agent_nr CDATA #REQUIRED>
+
+<!ELEMENT ExchangeServer EMPTY>
+<!ATTLIST ExchangeServer
+  xmlns CDATA #FIXED ''
+  RootCatalog CDATA #REQUIRED
+  URL CDATA #REQUIRED
+  login CDATA #REQUIRED
+  pass CDATA #REQUIRED>
+
+<!ELEMENT DataSetsConfiguration (DataSetConfiguration)+>
+<!ATTLIST DataSetsConfiguration
+  xmlns CDATA #FIXED ''
+  mode CDATA #REQUIRED
+  retrieveDataTriesNumber CDATA #IMPLIED>
+
+<!ELEMENT TempDataLocation EMPTY>
+<!ATTLIST TempDataLocation
+  xmlns CDATA #FIXED ''
+  Database CDATA #REQUIRED
+  Password CDATA #REQUIRED
+  Server CDATA #REQUIRED
+  UserId CDATA #REQUIRED
+  dbtype CDATA #REQUIRED
+  type CDATA #REQUIRED>
+
+<!ELEMENT DataSetConfiguration (Schedule,DataArea+)>
+<!ATTLIST DataSetConfiguration
+  xmlns CDATA #FIXED ''
+  ID CDATA #REQUIRED>
+
+<!ELEMENT Schedule EMPTY>
+<!ATTLIST Schedule
+  xmlns CDATA #FIXED ''
+  every CDATA #IMPLIED
+  time CDATA #IMPLIED
+  type CDATA #REQUIRED>
+
+<!ELEMENT DataArea (DataLocation,Actions?,DataDefinition)>
+<!ATTLIST DataArea
+  xmlns CDATA #FIXED ''
+  FileExistAction CDATA #IMPLIED
+  ID CDATA #REQUIRED
+  type CDATA #REQUIRED>
+
+<!ELEMENT DataLocation EMPTY>
+<!ATTLIST DataLocation
+  xmlns CDATA #FIXED ''
+  Database CDATA #IMPLIED
+  Password CDATA #IMPLIED
+  Server CDATA #IMPLIED
+  UserId CDATA #IMPLIED
+  dbtype CDATA #IMPLIED
+  path CDATA #IMPLIED
+  type CDATA #REQUIRED>
+
+<!ELEMENT Actions (Before+,After*)>
+<!ATTLIST Actions
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT DataDefinition (Filter|(Query,Mapping))?>
+<!ATTLIST DataDefinition
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT Before EMPTY>
+<!ATTLIST Before
+  xmlns CDATA #FIXED ''
+  expression CDATA #REQUIRED
+  job_name CDATA #REQUIRED
+  sql_type CDATA #REQUIRED
+  type CDATA #REQUIRED>
+
+<!ELEMENT After EMPTY>
+<!ATTLIST After
+  xmlns CDATA #FIXED ''
+  FireWhen CDATA #REQUIRED
+  expression CDATA #REQUIRED
+  job_name CDATA #REQUIRED
+  sql_type CDATA #REQUIRED
+  type CDATA #REQUIRED>
+
+<!ELEMENT Filter EMPTY>
+<!ATTLIST Filter
+  xmlns CDATA #FIXED ''
+  extension CDATA #REQUIRED
+  fileNamePattern CDATA #REQUIRED>
+
+<!ELEMENT Query EMPTY>
+<!ATTLIST Query
+  xmlns CDATA #FIXED ''
+  sql CDATA #REQUIRED
+  sql_type CDATA #REQUIRED>
+
+<!ELEMENT Mapping (Field)+>
+<!ATTLIST Mapping
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT Field EMPTY>
+<!ATTLIST Field
+  xmlns CDATA #FIXED ''
+  destination CDATA #REQUIRED
+  source CDATA #REQUIRED>
